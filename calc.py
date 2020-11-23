@@ -26,7 +26,6 @@ class CompositeOdds(Resource):
 class OptimizeInvestments(Resource):
   def get(self):
     tickets = json.loads(request.args.getlist('tickets')[0])
-    martingale = json.loads(request.args.get('martingale'))
 
     i = 0
     opt_tickets = {}
@@ -41,9 +40,9 @@ class OptimizeInvestments(Resource):
         zeros_and_max[-1] = str(int(zeros_and_max[-1]) + 1)
         int_and_dec[1] = "".join(zeros_and_max)
         inversed_odds_ceil = float(".".join(int_and_dec))
-        inv = inversed_odds_ceil * (10000 * martingale)
-        if inv < (100 * martingale):
-          inv = (100 * martingale)
+        inv = inversed_odds_ceil * 10000
+        if inv < 100:
+          inv = 100
         opt_tickets[key].append(
           {
             "id": obj["id"],
