@@ -23,7 +23,7 @@ class CompositeOdds(Resource):
       composite_odds = 1 / sum(inversed_odds)
       return { "composite_odds": composite_odds }
 
-class optimizeInvestments(Resource):
+class OptimizeInvestments(Resource):
   def get(self):
     tickets = json.loads(request.args.getlist('tickets')[0])
     martingale = json.loads(request.args.get('martingale'))
@@ -83,7 +83,7 @@ class optimizeInvestments(Resource):
     }
 
 api.add_resource(CompositeOdds, "/composite_odds")
-api.add_resource(optimizeInvestments, "/optimize_investments")
+api.add_resource(OptimizeInvestments, "/optimize_investments")
 
 if __name__ == '__main__':
     app.run(port='5002')
